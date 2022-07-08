@@ -12,17 +12,25 @@ fetch("http://localhost:3000/api/products")
         console.log(articles);
         for (let article in articles) {
 
+            let lienArticle = document.createElement("a");
+            document.querySelector(".items").appendChild(lienArticle);
+            lienArticle.href = 'product.html';
             
             let divArticle = document.createElement("article");
-            document.querySelector(".items").appendChild(divArticle);
-            divArticle.classList.add("fiche_prodruits");
+            lienArticle.appendChild(divArticle);
 
-            let lienArticle = document.createElement("a");
-            divArticle.appendChild(lienArticle);
-            lienArticle.href = 'product.html';
-            lienArticle.classList.add("lien_produits");
+            let imageProduit = document.createElement("img");
+            divArticle.appendChild(imageProduit);
+            imageProduit.src = data[article].imageUrl;
+            imageProduit.alt = data[article].altTxt;
 
+            let nomProduit = document.createElement("h3");
+            divArticle.appendChild(nomProduit);
+            nomProduit.innerHTML = data[article].name;
 
+            let descriptionProduit = document.createElement("p");
+            divArticle.appendChild(descriptionProduit);
+            descriptionProduit.innerHTML = data[article].description;
         }
 
     })
