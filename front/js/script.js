@@ -15,7 +15,8 @@ fetch("http://localhost:3000/api/products")
             //Création de la balise <a> et du lien vers la page produit
             let lienArticle = document.createElement("a");
             document.querySelector(".items").appendChild(lienArticle);
-            lienArticle.href = 'product.html';
+            lienArticle.href = "product.html?id=" + data[article]._id;
+
             
             //Création de la balise <article> dans la balise <a>
             let divArticle = document.createElement("article");
@@ -48,4 +49,6 @@ fetch("http://localhost:3000/api/products")
 }
 
 getArticles();
+
+
 
