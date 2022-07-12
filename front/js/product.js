@@ -8,7 +8,7 @@ const Image = document.querySelector(".item__img");
 const titre = document.getElementById('title');
 const prix = document.getElementById('price');
 const description = document.getElementById('description');
-var couleur = document.getElementById('colors');
+const couleur = document.getElementById('colors');
 
 //Récupération des informations de l'article dans la base de donnée
 function ficheArticles() {
@@ -52,3 +52,9 @@ fetch("http://localhost:3000/api/products/" + urlID)
 }
 
 ficheArticles();
+
+//Création des constantes pour l'ajout des articles dans le panier
+const BtnPanier = document.getElementById("addToCart");
+
+
+
