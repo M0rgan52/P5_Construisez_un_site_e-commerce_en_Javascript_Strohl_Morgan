@@ -8,7 +8,7 @@ const Image = document.querySelector(".item__img");
 const titre = document.getElementById('title');
 const prix = document.getElementById('price');
 const description = document.getElementById('description');
-const couleur = document.getElementById('colors');
+var couleur = document.getElementById('colors');
 
 function ficheArticles() {
 fetch("http://localhost:3000/api/products/" + urlID)
@@ -29,6 +29,12 @@ fetch("http://localhost:3000/api/products/" + urlID)
         titre.innerText = produit.name;
         prix.innerText = produit.price;
         description.innerText = produit.description;
+        
+        for (let i in produit.colors) {
+            let optionProduits = document.createElement("option");
+            couleur.appendChild(optionProduits);
+            optionProduits.innerText = produit.colors[i];
+        }
 
     })
     .catch(function(err) {
