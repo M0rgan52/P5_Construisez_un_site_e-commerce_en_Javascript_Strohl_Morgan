@@ -55,6 +55,33 @@ ficheArticles();
 
 //Création des constantes pour l'ajout des articles dans le panier
 const BtnPanier = document.getElementById("addToCart");
+let erreur = document.createElement("p");
+document.querySelector(".item__content__addButton").appendChild(erreur);
+
+console.log(document.querySelector("#colors").value);
+BtnPanier.addEventListener('click', function() {
+    erreur.innerText = "";
+    if ((document.getElementById("quantity").value > 0 && document.getElementById("quantity").value <= 100) && (document.querySelector("#colors").value !== "")){
+        let nouveauProduit = {
+            _id: urlID,
+            quantity: document.getElementById("quantity").value,
+            colors: couleur.innerText
+
+        };
+
+        let tableauProduit = [];
+
+        if (localStorage.getItem('produits') !== null) {
+            tableauProduit = JSON.parse(localStorage.getItem('produits'));
+        }
+        tableauProduit.push(nouveauProduit);
+        localStorage.setItem("produits", JSON.stringify(tableauProduit));
+
+    } else {
+        erreur.innerText = "Veuillez renseigner une quantité (entre 1 et 100) et choisir une couleur de canapé";
+
+    };
+});
 
 
 
