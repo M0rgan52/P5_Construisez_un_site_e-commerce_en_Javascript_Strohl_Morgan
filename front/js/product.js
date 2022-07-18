@@ -55,30 +55,36 @@ ficheArticles();
 
 //Création des constantes pour l'ajout des articles dans le panier
 const BtnPanier = document.getElementById("addToCart");
-let erreur = document.createElement("p");
+const erreur = document.createElement("div");
 document.querySelector(".item__content__addButton").appendChild(erreur);
+let tableauProduit = [];
 
-console.log(document.querySelector("#colors").value);
 BtnPanier.addEventListener('click', function() {
     erreur.innerText = "";
     if ((document.getElementById("quantity").value > 0 && document.getElementById("quantity").value <= 100) && (document.querySelector("#colors").value !== "")){
         let nouveauProduit = {
             _id: urlID,
             quantity: document.getElementById("quantity").value,
-            colors: couleur.innerText
+            colors: couleur.value
 
         };
-
-        let tableauProduit = [];
 
         if (localStorage.getItem('produits') !== null) {
             tableauProduit = JSON.parse(localStorage.getItem('produits'));
         }
+        
+        for (let doublon of tableauProduit) {
+            if (doublon._id === nouveauProduit._id && doublon.colors === nouveauProduit.colors) {
+                let addition = parseInt(doublon.quantity) + parseInt(nouveauProduit.quantity);
+                doublon.quantity = JSON.stringify(addition);
+                return (localStorage.setItem('produits', JSON.stringify(tableauProduit)));
+            }
+        }
+
         tableauProduit.push(nouveauProduit);
         localStorage.setItem("produits", JSON.stringify(tableauProduit));
-
     } else {
-        erreur.innerText = "Veuillez renseigner une quantité (entre 1 et 100) et choisir une couleur de canapé";
+        erreur.innerHTML = "Veuillez renseigner une quantité (entre 1 et 100) et choisir une couleur de canapé";
 
     };
 });
