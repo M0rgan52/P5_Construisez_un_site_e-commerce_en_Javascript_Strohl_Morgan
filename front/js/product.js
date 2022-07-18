@@ -59,9 +59,19 @@ const erreur = document.createElement("div");
 document.querySelector(".item__content__addButton").appendChild(erreur);
 let tableauProduit = [];
 
+//Création de l'écoute du bouton "ajouter au panier"
 BtnPanier.addEventListener('click', function() {
     erreur.innerText = "";
+    /*Si: 
+    la quantité est supérieur à 0 ET
+    la quantité est inférieur ou égale à 100 ET
+    une couleur est selectionnée
+    alors on peut ajouter un nouveau produit au panier*/
     if ((document.getElementById("quantity").value > 0 && document.getElementById("quantity").value <= 100) && (document.querySelector("#colors").value !== "")){
+        /*nouveau produit 
+        _id: string
+        quantity: string
+        colors: string */
         let nouveauProduit = {
             _id: urlID,
             quantity: document.getElementById("quantity").value,
@@ -69,10 +79,12 @@ BtnPanier.addEventListener('click', function() {
 
         };
 
+        //S'il y a déjà un article dans le panier, on le met en forme JS pour pouvoir ajouter un nouveau produits à la liste
         if (localStorage.getItem('produits') !== null) {
             tableauProduit = JSON.parse(localStorage.getItem('produits'));
         }
         
+        //Si un nouveau produit à le même ID ET la même couleur qu'un produit déjà existant dans le localstorage, alors on ajuste uniquement la quantité
         for (let doublon of tableauProduit) {
             if (doublon._id === nouveauProduit._id && doublon.colors === nouveauProduit.colors) {
                 let addition = parseInt(doublon.quantity) + parseInt(nouveauProduit.quantity);
@@ -81,6 +93,7 @@ BtnPanier.addEventListener('click', function() {
             }
         }
 
+        //On ajoute le nouveau produit aux panier et on transforme le localstorage en JSON pour pouvoir l'exporter dans la page panier
         tableauProduit.push(nouveauProduit);
         localStorage.setItem("produits", JSON.stringify(tableauProduit));
     } else {
