@@ -42,7 +42,10 @@ function creationPanier() {
         creationArticle.appendChild(divImage);
         divImage.classList.add("cart__item__img");
 
-        //Création de l'image
+        /*Importation et création de l'image
+        On appelle de nouveau la base de donnée
+        avec l'id pour pouvoir faire le lien avec l'image
+        */
         fetch("http://localhost:3000/api/products/" + article._id)
             .then(function(res) {
                 if (res.ok) {
@@ -76,6 +79,10 @@ function creationPanier() {
         divDescription.appendChild(couleur);
         divDescription.appendChild(prixU);
         couleur.innerText = article.colors;
+        /*
+        On appelle de nouveau la base de donnée
+        avec l'id pour pouvoir faire le lien avec le nom et le prix
+        */
         fetch("http://localhost:3000/api/products/" + article._id)
         .then(function(res) {
             if (res.ok) {
