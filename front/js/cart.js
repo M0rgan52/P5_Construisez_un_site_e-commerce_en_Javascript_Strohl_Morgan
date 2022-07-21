@@ -2,28 +2,6 @@
 let tableauProduit = JSON.parse(localStorage.getItem('produits'));
 const CreationSection = document.getElementById("cart__items");
 
-//Récupération de la base de données
-function fichePanier() {
-    fetch("http://localhost:3000/api/products")
-        .then(function(res) {
-            if (res.ok) {
-                return res.json();
-            }
-        })
-        .then(function(data) {
-            console.log(data);
-            creationPanier();
-    
-        })
-        .catch(function(err) {
-            let erreur = document.querySelector("#cart__items");
-            erreur.innerHTML = "Une erreur n'a pas permis d'afficher notre canapé. Veuillez nous excuser pour ce désagrement et nous vous invitons a réessayer ultérieurement. <br> L'équipe Kanap."
-            console.log("Erreur dans la récupération de la base de donnée");
-        });
-}
-    
-fichePanier();
-
 console.log(tableauProduit);
 
 function creationPanier() {
@@ -93,8 +71,11 @@ function creationPanier() {
             let affichage = resultat;
             titre.innerText = affichage.name;
             prixU.innerText = affichage.price + " €";
+            prixU.setAttribute("value", affichage.price);
         })
         .catch(erreur => alert("Erreur d'affichage" + erreur));
+        prixU.classList.add("PrixU");
+        
 
         //Création de la div contenant la quantité totale et le bouton supprimer
         let divSettings = document.createElement("div");
@@ -112,9 +93,11 @@ function creationPanier() {
         divQuantity.appendChild(inputQuantity);
         inputQuantity.classList.add("itemQuantity");
         inputQuantity.setAttribute("type", "number");
+        inputQuantity.setAttribute("name", "itemQuantity");
         inputQuantity.setAttribute("min", "1");
         inputQuantity.setAttribute("max", "100");
-        inputQuantity.setAttribute("value", article.quantity);
+        inputQuantity.value = article.quantity;
+        inputQuantity.setAttribute("value", article.quantity)
 
         //Création de la div contenant le bouton suppression
         let divDelete = document.createElement('div');
@@ -127,3 +110,41 @@ function creationPanier() {
 
     }
 }
+creationPanier();
+
+
+function total() {
+    var qte = document.querySelectorAll(".itemQuantity");
+    let totalQte = 0;
+
+    for (let p = 0; p < qte.length; p++) {
+        totalQte += qte[p].valueAsNumber;
+    }
+
+    let affichageQte = document.getElementById("totalQuantity");
+    affichageQte.innerText = totalQte;
+
+    fetch("http://localhost:3000/api/products")
+    .then(function(res) {
+        if (res.ok) {
+            return res.json();
+        }
+    })
+    .then(function(data) {
+        let article = data;
+        let totalPanier = 0;
+
+        for (let p = 0; p < qte.length; p++) {
+            let prixArticle = article.find(i => i._id === tableauProduit[p]._id);
+            totalPanier += qte[p].valueAsNumber * prixArticle.price;
+            
+            let affichagePrix = document.getElementById('totalPrice');
+            affichagePrix.innerText = totalPanier;
+    
+        }
+
+    })
+    .catch(erreur => console.log("Erreur d'affichage"));
+
+}
+total();
