@@ -178,3 +178,25 @@ function modificationQte () {
     }
 }
 modificationQte();
+
+function suppressionArticle() {
+    let supprimer = document.querySelectorAll(".deleteItem");
+
+    for (let p = 0; p < supprimer.length; ++p) {
+        supprimer[p].addEventListener("click", (e) => {
+            e.preventDefault;
+
+            let suppressionId = tableauProduit[p]._id;
+            let suppressionColors = tableauProduit[p].colors;
+
+            tableauProduit = tableauProduit.filter(i => i._id !== suppressionId || i.colors !== suppressionColors)
+            console.log(suppressionColors);
+            console.log(tableauProduit);
+
+            localStorage.setItem("produits", JSON.stringify(tableauProduit));
+
+            location.reload();
+        })
+    }
+}
+suppressionArticle();
