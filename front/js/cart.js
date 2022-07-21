@@ -112,8 +112,9 @@ function creationPanier() {
 }
 creationPanier();
 
-
+//Création d'une fonction pour calculer automatiquement la quantité et le prix total
 function total() {
+    //Calcul de la quantité
     var qte = document.querySelectorAll(".itemQuantity");
     let totalQte = 0;
 
@@ -124,6 +125,8 @@ function total() {
     let affichageQte = document.getElementById("totalQuantity");
     affichageQte.innerText = totalQte;
 
+    /*Calcul du prix total
+    Appel de la base de donnée pour récupérer les prix unitaire */
     fetch("http://localhost:3000/api/products")
     .then(function(res) {
         if (res.ok) {
@@ -148,3 +151,4 @@ function total() {
 
 }
 total();
+
