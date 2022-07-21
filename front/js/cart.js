@@ -152,21 +152,25 @@ function total() {
 }
 total();
 
+//Fonction permettant la modification de la quantité
 function modificationQte () {
     var qte = document.querySelectorAll(".itemQuantity");
     
     for (let p = 0; p < qte.length; p++) {
+        //On écoute l'évènement de changement du focus de la case quantité
         qte[p].addEventListener("change", (e) => {
             e.preventDefault();
 
             let ancienneQte = tableauProduit[p].quantity;
             let nouvelleQte = qte[p].valueAsNumber;
 
+            //Si la quantité à changé, on prend la nouvelle quantité
             if (ancienneQte !== nouvelleQte) {
                 ancienneQte = nouvelleQte;
                 tableauProduit[p].quantity = nouvelleQte;
             }
 
+            //Mise à jour du local storage
             localStorage.setItem("produits", JSON.stringify(tableauProduit));
             
             location.reload();
