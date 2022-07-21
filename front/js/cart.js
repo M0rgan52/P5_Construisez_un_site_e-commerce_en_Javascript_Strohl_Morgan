@@ -202,3 +202,62 @@ function suppressionArticle() {
     }
 }
 suppressionArticle();
+
+function controleFormulaire() {
+    let formulaire = document.querySelector(".cart__order__form");
+    const RegexOrdinaire = new RegExp("^[a-zA-Z ,.'-]+$");
+    const RegexEmail = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$');
+    const RegexAdresse = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+");
+    
+    formulaire.firstName.addEventListener('input', function(saisiePrenom) {
+        let erreurPrenom = formulaire.firstName.nextElementSibling;
+        
+        if (RegexOrdinaire.test(saisiePrenom.target.value)) {
+            erreurPrenom.innerText = "";
+        } else {
+            erreurPrenom.innerText = "Veuillez renseigner ce champ sans caractère spéciaux svp."
+        }
+    })
+
+    formulaire.lastName.addEventListener('input', function(saisieNom) {
+        let erreurNom = formulaire.lastName.nextElementSibling;
+        
+        if (RegexOrdinaire.test(saisieNom.target.value)) {
+            erreurNom.innerText = "";
+        } else {
+            erreurNom.innerText = "Veuillez renseigner ce champ sans caractère spéciaux svp."
+        }
+    })
+
+    formulaire.address.addEventListener('input', function(saisieAdresse) {
+        let erreurAdresse = formulaire.address.nextElementSibling;
+        
+        if (RegexAdresse.test(saisieAdresse.target.value)) {
+            erreurAdresse.innerText = "";
+        } else {
+            erreurAdresse.innerText = "Veuillez saisir votre numéro et nom de rue complète svp."
+        }
+    })
+
+    formulaire.city.addEventListener('input', function(saisieVille) {
+        let erreurVille = formulaire.city.nextElementSibling;
+        
+        if (RegexOrdinaire.test(saisieVille.target.value)) {
+            erreurVille.innerText = "";
+        } else {
+            erreurVille.innerText = "Veuillez renseigner ce champ sans caractère spéciaux svp."
+        }
+    })
+
+    formulaire.email.addEventListener('input', function(saisieEmail) {
+        let erreurEmail = formulaire.email.nextElementSibling;
+        
+        if (RegexEmail.test(saisieEmail.target.value)) {
+            erreurEmail.innerText = "";
+        } else {
+            erreurEmail.innerText = "Veuillez renseigner un mail valide svp."
+        }
+    })
+
+}
+controleFormulaire();
