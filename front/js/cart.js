@@ -152,3 +152,25 @@ function total() {
 }
 total();
 
+function modificationQte () {
+    var qte = document.querySelectorAll(".itemQuantity");
+    
+    for (let p = 0; p < qte.length; p++) {
+        qte[p].addEventListener("change", (e) => {
+            e.preventDefault();
+
+            let ancienneQte = tableauProduit[p].quantity;
+            let nouvelleQte = qte[p].valueAsNumber;
+
+            if (ancienneQte !== nouvelleQte) {
+                ancienneQte = nouvelleQte;
+                tableauProduit[p].quantity = nouvelleQte;
+            }
+
+            localStorage.setItem("produits", JSON.stringify(tableauProduit));
+            
+            location.reload();
+        })
+    }
+}
+modificationQte();
