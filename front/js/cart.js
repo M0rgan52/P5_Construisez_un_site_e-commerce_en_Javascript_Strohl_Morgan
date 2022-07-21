@@ -179,19 +179,21 @@ function modificationQte () {
 }
 modificationQte();
 
+//Création de la fonction du suppression d'un article
 function suppressionArticle() {
     let supprimer = document.querySelectorAll(".deleteItem");
 
     for (let p = 0; p < supprimer.length; ++p) {
+        //On écoute l'évènement du clique sur le bonton supprimer
         supprimer[p].addEventListener("click", (e) => {
             e.preventDefault;
 
             let suppressionId = tableauProduit[p]._id;
             let suppressionColors = tableauProduit[p].colors;
 
+            //Selection de l'article à supprimer en fonction de son id et de sa couleur via un filtre
             tableauProduit = tableauProduit.filter(i => i._id !== suppressionId || i.colors !== suppressionColors)
-            console.log(suppressionColors);
-            console.log(tableauProduit);
+
 
             localStorage.setItem("produits", JSON.stringify(tableauProduit));
 
