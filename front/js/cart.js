@@ -203,12 +203,15 @@ function suppressionArticle() {
 }
 suppressionArticle();
 
+//Création de la fonction de controle de la saisie du formulaire
 function controleFormulaire() {
+    //Déclaration des constantes et variables
     let formulaire = document.querySelector(".cart__order__form");
     const RegexOrdinaire = new RegExp("^[a-zA-Z ,.'-]+$");
     const RegexEmail = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$');
     const RegexAdresse = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+");
     
+    //Controle du prénom
     formulaire.firstName.addEventListener('input', function(saisiePrenom) {
         let erreurPrenom = formulaire.firstName.nextElementSibling;
         
@@ -219,6 +222,7 @@ function controleFormulaire() {
         }
     })
 
+    //Controle du Nom
     formulaire.lastName.addEventListener('input', function(saisieNom) {
         let erreurNom = formulaire.lastName.nextElementSibling;
         
@@ -229,6 +233,7 @@ function controleFormulaire() {
         }
     })
 
+    //Controle de l'adresse
     formulaire.address.addEventListener('input', function(saisieAdresse) {
         let erreurAdresse = formulaire.address.nextElementSibling;
         
@@ -239,6 +244,7 @@ function controleFormulaire() {
         }
     })
 
+    //Controle de la ville
     formulaire.city.addEventListener('input', function(saisieVille) {
         let erreurVille = formulaire.city.nextElementSibling;
         
@@ -249,6 +255,7 @@ function controleFormulaire() {
         }
     })
 
+    //Controle de l'email
     formulaire.email.addEventListener('input', function(saisieEmail) {
         let erreurEmail = formulaire.email.nextElementSibling;
         
