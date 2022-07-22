@@ -298,7 +298,6 @@ function envoiFormulaire() {
             },
             products: ListePanier
         };
-        console.table(infoCommande);
 
         //Envoi à la base de donnée du panier et des informations de contact via une méthode POST et redirection vers la page de confirmation
         fetch("http://localhost:3000/api/products/order",{
@@ -311,7 +310,7 @@ function envoiFormulaire() {
         })
         .then((res) =>  res.json())
         .then(function(data) {
-            console.log(data);
+            console.table(data);
             localStorage.clear();
             localStorage.setItem("orderId", data.orderId);
             document.location.href = "confirmation.html";
