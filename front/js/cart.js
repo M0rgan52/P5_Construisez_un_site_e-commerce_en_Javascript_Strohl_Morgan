@@ -324,6 +324,8 @@ function envoiFormulaire() {
         .then(function(data) {
             if ((recupPrenom.value == "") || (recupNom.value == "") || (recupAdresse.value == "") || (recupVille.value == "") || (recupEmail.value == "")) {
                 alert("Veuillez compléter tous les champs du formulaire svp. Les champs Prénom, Nom et Ville ne doivent pas comporter de caractère spéciaux. Le champs adresse doit commencer par le numéro de la rue. L'email doit être valide");
+            } else if (tableauProduit == null || tableauProduit == 0) {
+                alert("Veuillez selectionner au moins un article svp.");
             } else {
             console.table(data);
             localStorage.clear();
