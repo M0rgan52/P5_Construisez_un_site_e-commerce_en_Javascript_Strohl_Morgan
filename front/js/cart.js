@@ -268,3 +268,56 @@ function controleFormulaire() {
 
 }
 controleFormulaire();
+
+
+function envoiFormulaire() {
+    let commande = document.getElementById("order");
+
+    commande.addEventListener("click", (e) => {
+        e.preventDefault();
+        let recupPrenom = document.getElementById("firstName");
+        let recupNom = document.getElementById("lastName");
+        let recupAdresse = document.getElementById("address");
+        let recupVille = document.getElementById("city");
+        let recupEmail = document.getElementById("email");
+        let ListePanier = [];
+
+        for (let p = 0; p < tableauProduit.length; p++) {
+            ListePanier.push(tableauProduit[p]._id);
+        };
+        
+        const infoCommande = {
+            contact: {
+                firstName: recupPrenom.value,
+                lastName: recupNom.value,
+                address: recupAdresse.value,
+                city: recupVille.value,
+                email: recupEmail.value,
+            },
+            products: ListePanier
+        };
+        console.table(infoCommande);
+
+
+        fetch("http://localhost:3000/api/products/order",{
+            method: "POST",
+            body: JSON.stringify(infoCommande),
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+        })
+        .then((res) =>  res.json())
+        .then(function(data) {
+            console.log(data);
+            localStorage.clear();
+            localStorage.setItem("orderId", data.orderId);
+            document.location.href = "confirmation.html";
+    
+    
+        })
+        .catch((erreur) => console.log(erreur.message));
+
+    });
+}
+envoiFormulaire();
