@@ -269,10 +269,11 @@ function controleFormulaire() {
 }
 controleFormulaire();
 
-
+//Création de la fonction d'envoi de la commande
 function envoiFormulaire() {
     let commande = document.getElementById("order");
 
+    //Ecoute de l'évènement de clique sur le bouton commander
     commande.addEventListener("click", (e) => {
         e.preventDefault();
         let recupPrenom = document.getElementById("firstName");
@@ -286,6 +287,7 @@ function envoiFormulaire() {
             ListePanier.push(tableauProduit[p]._id);
         };
         
+        //Initialisation de l'objet contact
         const infoCommande = {
             contact: {
                 firstName: recupPrenom.value,
@@ -298,7 +300,7 @@ function envoiFormulaire() {
         };
         console.table(infoCommande);
 
-
+        //Envoi à la base de donnée du panier et des informations de contact via une méthode POST et redirection vers la page de confirmation
         fetch("http://localhost:3000/api/products/order",{
             method: "POST",
             body: JSON.stringify(infoCommande),
