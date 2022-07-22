@@ -6,6 +6,13 @@ console.log(tableauProduit);
 
 function creationPanier() {
 
+    //Si le panier est vide, prévenir le client
+    if (tableauProduit === null) {
+        let vide = document.querySelector(".cartAndFormContainer > h1");
+        vide.innerText = "Votre panier est vide";
+        
+    };
+     
     for (let article of tableauProduit) {
 
         //Création de la balise article
@@ -281,6 +288,11 @@ function envoiFormulaire() {
         let recupAdresse = document.getElementById("address");
         let recupVille = document.getElementById("city");
         let recupEmail = document.getElementById("email");
+
+        /*if un champs === null
+        message d'alert 
+        ne pas envoyer la rqt
+        else  */
         let ListePanier = [];
 
         for (let p = 0; p < tableauProduit.length; p++) {
