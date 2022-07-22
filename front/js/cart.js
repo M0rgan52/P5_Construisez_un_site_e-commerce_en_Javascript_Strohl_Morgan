@@ -276,23 +276,23 @@ function controleFormulaire() {
 }
 controleFormulaire();
 
+//Création des variables pour la suite des fonctions
+let recupPrenom = document.getElementById("firstName");
+let recupNom = document.getElementById("lastName");
+let recupAdresse = document.getElementById("address");
+let recupVille = document.getElementById("city");
+let recupEmail = document.getElementById("email");
+
+
 //Création de la fonction d'envoi de la commande
 function envoiFormulaire() {
     let commande = document.getElementById("order");
+    
 
     //Ecoute de l'évènement de clique sur le bouton commander
     commande.addEventListener("click", (e) => {
         e.preventDefault();
-        let recupPrenom = document.getElementById("firstName");
-        let recupNom = document.getElementById("lastName");
-        let recupAdresse = document.getElementById("address");
-        let recupVille = document.getElementById("city");
-        let recupEmail = document.getElementById("email");
 
-        /*if un champs === null
-        message d'alert 
-        ne pas envoyer la rqt
-        else  */
         let ListePanier = [];
 
         for (let p = 0; p < tableauProduit.length; p++) {
@@ -322,14 +322,18 @@ function envoiFormulaire() {
         })
         .then((res) =>  res.json())
         .then(function(data) {
+            if ((recupPrenom.value == "") || (recupNom.value == "") || (recupAdresse.value == "") || (recupVille.value == "") || (recupEmail.value == "")) {
+                alert("Veuillez compléter tous les champs du formulaire svp. Les champs Prénom, Nom et Ville ne doivent pas comporter de caractère spéciaux. Le champs adresse doit commencer par le numéro de la rue. L'email doit être valide");
+            } else {
             console.table(data);
             localStorage.clear();
             localStorage.setItem("orderId", data.orderId);
             document.location.href = "confirmation.html";
+            }
     
     
         })
-        .catch((erreur) => console.log(erreur.message));
+        .catch((erreur) => console.log(erreur.message));   
 
     });
 }
