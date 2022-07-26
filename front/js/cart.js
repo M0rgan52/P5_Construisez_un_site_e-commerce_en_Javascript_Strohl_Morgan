@@ -1,6 +1,7 @@
 //Création des constantes pour la récupération et l'affichage du localstorage
-let tableauProduit = JSON.parse(localStorage.getItem('produits'));
+var tableauProduit = JSON.parse(localStorage.getItem('produits'));
 const CreationSection = document.getElementById("cart__items");
+
 
 console.log(tableauProduit);
 
@@ -277,11 +278,11 @@ function controleFormulaire() {
 controleFormulaire();
 
 //Création des variables pour la suite des fonctions
-let recupPrenom = document.getElementById("firstName");
-let recupNom = document.getElementById("lastName");
-let recupAdresse = document.getElementById("address");
-let recupVille = document.getElementById("city");
-let recupEmail = document.getElementById("email");
+var recupPrenom = document.getElementById("firstName");
+var recupNom = document.getElementById("lastName");
+var recupAdresse = document.getElementById("address");
+var recupVille = document.getElementById("city");
+var recupEmail = document.getElementById("email");
 
 
 //Création de la fonction d'envoi de la commande

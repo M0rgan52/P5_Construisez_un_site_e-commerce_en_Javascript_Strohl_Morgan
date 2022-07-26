@@ -1,5 +1,5 @@
 //Récupération de l'ID présent dans l'URL
-let url = new URL(document.location).searchParams;
+var url = new URL(document.location).searchParams;
 var urlID = url.get("id");
 console.log(urlID);
 
@@ -57,7 +57,7 @@ ficheArticles();
 const BtnPanier = document.getElementById("addToCart");
 const erreur = document.createElement("div");
 document.querySelector(".item__content__addButton").appendChild(erreur);
-let tableauProduit = [];
+var tableauProduit = [];
 
 //Création de l'écoute du bouton "ajouter au panier"
 BtnPanier.addEventListener('click', function() {
@@ -68,7 +68,6 @@ BtnPanier.addEventListener('click', function() {
     une couleur est selectionnée
     alors on peut ajouter un nouveau produit au panier*/
     if ((document.getElementById("quantity").value > 0 && document.getElementById("quantity").value <= 100) && (document.querySelector("#colors").value !== "")){
-        alert("Le produit à bien été ajouté au panier.");
         /*nouveau produit 
         _id: string
         quantity: string
@@ -97,11 +96,9 @@ BtnPanier.addEventListener('click', function() {
         //On ajoute le nouveau produit aux panier et on transforme le localstorage en JSON pour pouvoir l'exporter dans la page panier
         tableauProduit.push(nouveauProduit);
         localStorage.setItem("produits", JSON.stringify(tableauProduit));
+        alert("Le produit à bien été ajouté au panier.");
     } else {
         erreur.innerHTML = "Veuillez renseigner une quantité (entre 1 et 100) et choisir une couleur de canapé";
 
     };
 });
-
-
-
