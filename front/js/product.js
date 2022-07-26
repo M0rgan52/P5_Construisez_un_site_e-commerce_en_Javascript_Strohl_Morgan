@@ -68,6 +68,7 @@ BtnPanier.addEventListener('click', function() {
     une couleur est selectionnée
     alors on peut ajouter un nouveau produit au panier*/
     if ((document.getElementById("quantity").value > 0 && document.getElementById("quantity").value <= 100) && (document.querySelector("#colors").value !== "")){
+        alert("Le produit à bien été ajouté au panier.");
         /*nouveau produit 
         _id: string
         quantity: string
