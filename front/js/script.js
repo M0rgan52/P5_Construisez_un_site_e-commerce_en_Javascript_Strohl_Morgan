@@ -31,18 +31,18 @@ fetch("http://localhost:3000/api/products")
             //Intégration du nom du produit dans la balise <article>
             let nomProduit = document.createElement("h3");
             divArticle.appendChild(nomProduit);
-            nomProduit.innerHTML = data[article].name;
+            nomProduit.innerText = data[article].name;
 
             //Intégration de la description dans la balise <article>
             let descriptionProduit = document.createElement("p");
             divArticle.appendChild(descriptionProduit);
-            descriptionProduit.innerHTML = data[article].description;
+            descriptionProduit.innerText = data[article].description;
         }
 
     })
     .catch(function(err) {
         let erreur = document.getElementById("items");
-        erreur.innerHTML = "Une erreur n'a pas permis d'afficher nos canapés. Veuillez nous excuser pour ce désagrement et nous vous invitons a réessayer ultérieurement. <br> L'équipe Kanap."
+        erreur.innerText = "Une erreur n'a pas permis d'afficher nos canapés. Veuillez nous excuser pour ce désagrement et nous vous invitons a réessayer ultérieurement. <br> L'équipe Kanap."
         console.log("Une erreur est survenue. Impossible de se connecter au serveur")
     });
 

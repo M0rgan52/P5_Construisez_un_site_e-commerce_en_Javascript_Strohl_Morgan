@@ -46,7 +46,7 @@ fetch("http://localhost:3000/api/products/" + urlID)
     })
     .catch(function(err) {
         let erreur = document.querySelector("item__img");
-        erreur.innerHTML = "Une erreur n'a pas permis d'afficher notre canapé. Veuillez nous excuser pour ce désagrement et nous vous invitons a réessayer ultérieurement. <br> L'équipe Kanap."
+        erreur.innerText = "Une erreur n'a pas permis d'afficher notre canapé. Veuillez nous excuser pour ce désagrement et nous vous invitons a réessayer ultérieurement. <br> L'équipe Kanap."
         console.log("Erreur dans la récupération de l'article");
     });
 }
@@ -98,7 +98,7 @@ BtnPanier.addEventListener('click', function() {
         localStorage.setItem("produits", JSON.stringify(tableauProduit));
         alert("Le produit à bien été ajouté au panier.");
     } else {
-        erreur.innerHTML = "Veuillez renseigner une quantité (entre 1 et 100) et choisir une couleur de canapé";
+        erreur.innerText = "Veuillez renseigner une quantité (entre 1 et 100) et choisir une couleur de canapé";
 
     };
 });
