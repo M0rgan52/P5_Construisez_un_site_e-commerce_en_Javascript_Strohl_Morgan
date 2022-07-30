@@ -96,7 +96,7 @@ function creationPanier() {
         divQuantity.classList.add("cart__item__content__settings__quantity");
         let textQuantity = document.createElement("p")
         divQuantity.appendChild(textQuantity);
-        textQuantity.innerText = "Qté :";
+        textQuantity.innerText = "Qté (entre 1 et 100) :";
         let inputQuantity = document.createElement("input");
         divQuantity.appendChild(inputQuantity);
         inputQuantity.classList.add("itemQuantity");
@@ -173,7 +173,7 @@ function modificationQte () {
             let nouvelleQte = qte[p].valueAsNumber;
 
             //Si la quantité à changé, on prend la nouvelle quantité
-            if ((ancienneQte !== nouvelleQte) && (nouvelleQte > 0)) {
+            if ((ancienneQte !== nouvelleQte) && (nouvelleQte > 0) && (nouvelleQte <= 100)) {
                 ancienneQte = nouvelleQte;
                 tableauProduit[p].quantity = nouvelleQte;
             }
