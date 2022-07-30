@@ -88,6 +88,11 @@ BtnPanier.addEventListener('click', function() {
         for (let doublon of tableauProduit) {
             if (doublon._id === nouveauProduit._id && doublon.colors === nouveauProduit.colors) {
                 let addition = parseInt(doublon.quantity) + parseInt(nouveauProduit.quantity);
+                if (addition > 100) {
+                    addition = 100;
+                } else if (addition < 0) {
+                    addition = 0;
+                }
                 doublon.quantity = JSON.stringify(addition);
                 return (localStorage.setItem('produits', JSON.stringify(tableauProduit)));
             }
