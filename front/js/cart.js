@@ -211,14 +211,15 @@ function suppressionArticle() {
 }
 suppressionArticle();
 
+const RegexOrdinaire = new RegExp("^[a-zA-Zéèà ,.'-]+$");
+const RegexEmail = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$');
+const RegexAdresse = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+");
+
 //Création de la fonction de controle de la saisie du formulaire
 function controleFormulaire() {
 
     //Déclaration des constantes et variables
     let formulaire = document.querySelector(".cart__order__form");
-    const RegexOrdinaire = new RegExp("^[a-zA-Zéèà ,.'-]+$");
-    const RegexEmail = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$');
-    const RegexAdresse = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+");
     
     //Controle du prénom
     formulaire.firstName.addEventListener('input', function(saisiePrenom) {
@@ -226,8 +227,10 @@ function controleFormulaire() {
         
         if (RegexOrdinaire.test(saisiePrenom.target.value)) {
             erreurPrenom.innerText = "";
+            document.querySelector('.cart__order__form__submit input').setAttribute('type', 'submit');
         } else {
             erreurPrenom.innerText = "Veuillez renseigner ce champ sans caractère spéciaux svp.";
+            document.querySelector('.cart__order__form__submit input').setAttribute('type', 'hidden');
         }
     })
 
@@ -237,8 +240,10 @@ function controleFormulaire() {
         
         if (RegexOrdinaire.test(saisieNom.target.value)) {
             erreurNom.innerText = "";
+            document.querySelector('.cart__order__form__submit input').setAttribute('type', 'submit');
         } else {
             erreurNom.innerText = "Veuillez renseigner ce champ sans caractère spéciaux svp.";
+            document.querySelector('.cart__order__form__submit input').setAttribute('type', 'hidden');
         }
     })
 
@@ -248,8 +253,10 @@ function controleFormulaire() {
         
         if (RegexAdresse.test(saisieAdresse.target.value)) {
             erreurAdresse.innerText = "";
+            document.querySelector('.cart__order__form__submit input').setAttribute('type', 'submit');
         } else {
             erreurAdresse.innerText = "Veuillez saisir votre numéro et nom de rue complète svp.";
+            document.querySelector('.cart__order__form__submit input').setAttribute('type', 'hidden');
         }
     })
 
@@ -259,8 +266,10 @@ function controleFormulaire() {
         
         if (RegexOrdinaire.test(saisieVille.target.value)) {
             erreurVille.innerText = "";
+            document.querySelector('.cart__order__form__submit input').setAttribute('type', 'submit');
         } else {
             erreurVille.innerText = "Veuillez renseigner ce champ sans caractère spéciaux svp.";
+            document.querySelector('.cart__order__form__submit input').setAttribute('type', 'hidden');
         }
     })
 
@@ -270,8 +279,10 @@ function controleFormulaire() {
         
         if (RegexEmail.test(saisieEmail.target.value)) {
             erreurEmail.innerText = "";
+            document.querySelector('.cart__order__form__submit input').setAttribute('type', 'submit');
         } else {
             erreurEmail.innerText = "Veuillez renseigner un mail valide svp.";
+            document.querySelector('.cart__order__form__submit input').setAttribute('type', 'hidden');
         }
     })
 
@@ -289,11 +300,10 @@ var recupEmail = document.getElementById("email");
 //Création de la fonction d'envoi de la commande
 function envoiFormulaire() {
     let commande = document.getElementById("order");
-    
 
     //Ecoute de l'évènement de clique sur le bouton commander
     commande.addEventListener("click", (e) => {
-        e.preventDefault();
+        e.preventDefault();       
 
         let ListePanier = [];
 
@@ -328,7 +338,7 @@ function envoiFormulaire() {
                 alert("Veuillez compléter tous les champs du formulaire svp. Les champs Prénom, Nom et Ville ne doivent pas comporter de caractère spéciaux. Le champs adresse doit commencer par le numéro de la rue. L'email doit être valide");
             } else if (tableauProduit == null || tableauProduit == 0 || tableauProduit.quantity < 0) {
                 alert("Veuillez selectionner au moins un article svp.");
-            } else {
+            }  else {
             console.table(data);
             localStorage.clear();
             localStorage.setItem("orderId", data.orderId);
