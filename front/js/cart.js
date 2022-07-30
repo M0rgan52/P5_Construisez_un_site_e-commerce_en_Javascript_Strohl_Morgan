@@ -173,7 +173,7 @@ function modificationQte () {
             let nouvelleQte = qte[p].valueAsNumber;
 
             //Si la quantité à changé, on prend la nouvelle quantité
-            if (ancienneQte !== nouvelleQte) {
+            if ((ancienneQte !== nouvelleQte) && (nouvelleQte > 0)) {
                 ancienneQte = nouvelleQte;
                 tableauProduit[p].quantity = nouvelleQte;
             }
@@ -213,6 +213,7 @@ suppressionArticle();
 
 //Création de la fonction de controle de la saisie du formulaire
 function controleFormulaire() {
+
     //Déclaration des constantes et variables
     let formulaire = document.querySelector(".cart__order__form");
     const RegexOrdinaire = new RegExp("^[a-zA-Zéèà ,.'-]+$");
@@ -226,7 +227,7 @@ function controleFormulaire() {
         if (RegexOrdinaire.test(saisiePrenom.target.value)) {
             erreurPrenom.innerText = "";
         } else {
-            erreurPrenom.innerText = "Veuillez renseigner ce champ sans caractère spéciaux svp."
+            erreurPrenom.innerText = "Veuillez renseigner ce champ sans caractère spéciaux svp.";
         }
     })
 
@@ -237,7 +238,7 @@ function controleFormulaire() {
         if (RegexOrdinaire.test(saisieNom.target.value)) {
             erreurNom.innerText = "";
         } else {
-            erreurNom.innerText = "Veuillez renseigner ce champ sans caractère spéciaux svp."
+            erreurNom.innerText = "Veuillez renseigner ce champ sans caractère spéciaux svp.";
         }
     })
 
@@ -248,7 +249,7 @@ function controleFormulaire() {
         if (RegexAdresse.test(saisieAdresse.target.value)) {
             erreurAdresse.innerText = "";
         } else {
-            erreurAdresse.innerText = "Veuillez saisir votre numéro et nom de rue complète svp."
+            erreurAdresse.innerText = "Veuillez saisir votre numéro et nom de rue complète svp.";
         }
     })
 
@@ -259,7 +260,7 @@ function controleFormulaire() {
         if (RegexOrdinaire.test(saisieVille.target.value)) {
             erreurVille.innerText = "";
         } else {
-            erreurVille.innerText = "Veuillez renseigner ce champ sans caractère spéciaux svp."
+            erreurVille.innerText = "Veuillez renseigner ce champ sans caractère spéciaux svp.";
         }
     })
 
@@ -270,12 +271,13 @@ function controleFormulaire() {
         if (RegexEmail.test(saisieEmail.target.value)) {
             erreurEmail.innerText = "";
         } else {
-            erreurEmail.innerText = "Veuillez renseigner un mail valide svp."
+            erreurEmail.innerText = "Veuillez renseigner un mail valide svp.";
         }
     })
 
 }
 controleFormulaire();
+
 
 //Création des variables pour la suite des fonctions
 var recupPrenom = document.getElementById("firstName");
@@ -283,7 +285,6 @@ var recupNom = document.getElementById("lastName");
 var recupAdresse = document.getElementById("address");
 var recupVille = document.getElementById("city");
 var recupEmail = document.getElementById("email");
-
 
 //Création de la fonction d'envoi de la commande
 function envoiFormulaire() {
@@ -325,7 +326,7 @@ function envoiFormulaire() {
         .then(function(data) {
             if ((recupPrenom.value == "") || (recupNom.value == "") || (recupAdresse.value == "") || (recupVille.value == "") || (recupEmail.value == "")) {
                 alert("Veuillez compléter tous les champs du formulaire svp. Les champs Prénom, Nom et Ville ne doivent pas comporter de caractère spéciaux. Le champs adresse doit commencer par le numéro de la rue. L'email doit être valide");
-            } else if (tableauProduit == null || tableauProduit == 0) {
+            } else if (tableauProduit == null || tableauProduit == 0 || tableauProduit.quantity < 0) {
                 alert("Veuillez selectionner au moins un article svp.");
             } else {
             console.table(data);
