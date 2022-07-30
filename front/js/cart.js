@@ -215,7 +215,7 @@ suppressionArticle();
 function controleFormulaire() {
     //Déclaration des constantes et variables
     let formulaire = document.querySelector(".cart__order__form");
-    const RegexOrdinaire = new RegExp("^[a-zA-Z ,.'-]+$");
+    const RegexOrdinaire = new RegExp("^[a-zA-Zéèà ,.'-]+$");
     const RegexEmail = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$');
     const RegexAdresse = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+");
     
