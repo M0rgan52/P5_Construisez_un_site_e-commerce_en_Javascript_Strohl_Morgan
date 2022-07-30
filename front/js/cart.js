@@ -216,13 +216,13 @@ const RegexEmail = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{
 const RegexAdresse = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+");
 
 //Création de la fonction de controle de la saisie du formulaire
-function controleFormulaire() {
+async function controleFormulaire() {
 
     //Déclaration des constantes et variables
     let formulaire = document.querySelector(".cart__order__form");
     
     //Controle du prénom
-    formulaire.firstName.addEventListener('input', function(saisiePrenom) {
+    formulaire.firstName.addEventListener('input', await function(saisiePrenom) {
         let erreurPrenom = formulaire.firstName.nextElementSibling;
         
         if (RegexOrdinaire.test(saisiePrenom.target.value)) {
@@ -235,7 +235,7 @@ function controleFormulaire() {
     })
 
     //Controle du Nom
-    formulaire.lastName.addEventListener('input', function(saisieNom) {
+    formulaire.lastName.addEventListener('input', await function(saisieNom) {
         let erreurNom = formulaire.lastName.nextElementSibling;
         
         if (RegexOrdinaire.test(saisieNom.target.value)) {
@@ -248,7 +248,7 @@ function controleFormulaire() {
     })
 
     //Controle de l'adresse
-    formulaire.address.addEventListener('input', function(saisieAdresse) {
+    formulaire.address.addEventListener('input', await function(saisieAdresse) {
         let erreurAdresse = formulaire.address.nextElementSibling;
         
         if (RegexAdresse.test(saisieAdresse.target.value)) {
@@ -261,7 +261,7 @@ function controleFormulaire() {
     })
 
     //Controle de la ville
-    formulaire.city.addEventListener('input', function(saisieVille) {
+    formulaire.city.addEventListener('input', await function(saisieVille) {
         let erreurVille = formulaire.city.nextElementSibling;
         
         if (RegexOrdinaire.test(saisieVille.target.value)) {
@@ -323,6 +323,7 @@ function envoiFormulaire() {
             products: ListePanier
         };
 
+        console.log(RegexOrdinaire.test(firstName.value));
         //Envoi à la base de donnée du panier et des informations de contact via une méthode POST et redirection vers la page de confirmation
         fetch("http://localhost:3000/api/products/order",{
             method: "POST",
@@ -338,7 +339,7 @@ function envoiFormulaire() {
                 alert("Veuillez compléter tous les champs du formulaire svp. Les champs Prénom, Nom et Ville ne doivent pas comporter de caractère spéciaux. Le champs adresse doit commencer par le numéro de la rue. L'email doit être valide");
             } else if (tableauProduit == null || tableauProduit == 0 || tableauProduit.quantity < 0) {
                 alert("Veuillez selectionner au moins un article svp.");
-            }  else {
+            }  else if ((RegexOrdinaire.test(firstName.value)) && (RegexOrdinaire.test(lastName.value)) && (RegexAdresse.test(address.value)) && (RegexOrdinaire.test(city.value)) && (RegexEmail.test(email.value))){
             console.table(data);
             localStorage.clear();
             localStorage.setItem("orderId", data.orderId);
