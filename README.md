@@ -2,8 +2,6 @@
 
 Il s'agit du **projet n°:five:** de la formation Développeur Web d'OpenClassrooms (Juillet 2022).
 
-**_(Projet en cours de validation :hourglass_flowing_sand:)_**
-
 ## Contexte :clipboard:
 
 Ce projet consiste à créer une plateforme de e-commerce en plus d'une boutique physique.
